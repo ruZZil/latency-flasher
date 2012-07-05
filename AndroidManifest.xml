@@ -32,6 +32,8 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name=".FlasherServiceWidget.ACTION_WIDGET_STOPSERVICE" />
+                <action android:name=".FlasherServiceWidget.ACTION_WIDGET_STARTSERVICE" />
             </intent-filter>
 
             <meta-data

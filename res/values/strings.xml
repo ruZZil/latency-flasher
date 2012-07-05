@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">FlashServiceActivity</string>
+    <string name="hello">Latency Flasher</string>
     <string name="app_name">FlashService</string>
     <string name="buttonStart">Start</string>
     <string name="buttonStop">Stop</string>
