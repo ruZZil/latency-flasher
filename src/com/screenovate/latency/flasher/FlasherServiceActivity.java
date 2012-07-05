@@ -28,8 +28,10 @@ public class FlasherServiceActivity extends Activity implements OnClickListener 
     switch (src.getId()) {
     case R.id.buttonStart:
       Log.d(TAG, "onClick: starting srvice");
-      startService(new Intent(this, FlasherServiceService.class));
-      break;
+		Intent starServiceIntent = new Intent(this, FlasherServiceService.class);
+		starServiceIntent.putExtra("timeStep", 100);
+		this.startService(starServiceIntent);
+		break;
     case R.id.buttonStop:
       Log.d(TAG, "onClick: stopping srvice");
       stopService(new Intent(this, FlasherServiceService.class));

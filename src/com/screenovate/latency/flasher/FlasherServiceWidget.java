@@ -51,7 +51,9 @@ public class FlasherServiceWidget extends AppWidgetProvider {
 		if (action.equals(ACTION_WIDGET_STOPSERVICE)) {
 			context.stopService(new Intent(context, FlasherServiceService.class));
 		} else if (action.equals(ACTION_WIDGET_STARTSERVICE)) {
-			context.startService(new Intent(context,FlasherServiceService.class));
+			Intent starServiceIntent = new Intent(context, FlasherServiceService.class);
+			starServiceIntent.putExtra("timeStep", 100);
+			context.startService(starServiceIntent);
 		}
 
 	}

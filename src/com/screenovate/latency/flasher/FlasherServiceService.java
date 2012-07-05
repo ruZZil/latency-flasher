@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 public class FlasherServiceService extends Service {
 
 	private View timeView;
+	private int mTimeStep = 100;
 
 	private class TimeView extends View {
 		private Handler mHandler = new Handler() {
@@ -27,7 +29,7 @@ public class FlasherServiceService extends Service {
 				if (msg.what == 1) {
 					updateDisplay();
 					Message m = obtainMessage(1);
-					sendMessageDelayed(m, 100);
+					sendMessageDelayed(m, mTimeStep);
 				}
 			}
 		};
@@ -80,25 +82,26 @@ public class FlasherServiceService extends Service {
 
 			counter++;
 
-			// int width = 16;
-			// int height = 16;
-
-			// long currentTime = android.os.SystemClock.uptimeMillis();
-			// for (int i= 0; i < 32; i++) {
-			// canvas.drawRect(i*width, 0, (i+1)*width, height,
-			// ((currentTime & (1L << i)) != 0) ? paintWhite: paintBlack);
-			// }
 		}
 
 		void updateDisplay() {
 			invalidate();
 		}
 	}
+	
+	
+    @Override
+   public int onStartCommand(Intent intent, int flags, int startId) {
+    	mTimeStep = intent.getIntExtra("timeStep", 100);
+    	return super.onStartCommand(intent, flags, startId);
+    }
+	
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		timeView = new TimeView(this);
+		
 		WindowManager.LayoutParams params = new WindowManager.LayoutParams(
 				WindowManager.LayoutParams.MATCH_PARENT,
 				WindowManager.LayoutParams.WRAP_CONTENT,
